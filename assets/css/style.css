@@ -176,22 +176,75 @@ body {
 /* ---------- Hero ---------- */
 .hero { padding: 48px 40px; }
 
+.hero-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
 .hero-title {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: clamp(26px, 4vw, 40px);
   font-weight: 700;
   letter-spacing: -0.01em;
-  background: linear-gradient(100deg, var(--a1), var(--a2), var(--a3), var(--a1));
-  background-size: 220% auto;
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  animation: hue 7s linear infinite;
+  color: #000;
 }
 
-@keyframes hue { to { background-position: 220% center; } }
+.hero-count {
+  color: var(--muted);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
 
-.hero-sub { margin: 0; color: var(--muted); font-size: 16px; }
+.folders { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+.folder {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  font-size: 14px;
+  text-decoration: none;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.folder:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(109, 94, 252, 0.3), 0 10px 24px rgba(109, 94, 252, 0.22);
+}
+
+.folder-name { font-weight: 500; }
+
+.folder-count {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #eeeaff;
+  color: #5b4bdb;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cat-section { margin-top: 30px; scroll-margin-top: 24px; }
+
+.cat-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding-left: 12px;
+  border-left: 4px solid var(--a1);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.cat-count { color: var(--muted); font-size: 13px; font-weight: 400; }
 
 /* ---------- 卡片瀑布流 ---------- */
 .grid {

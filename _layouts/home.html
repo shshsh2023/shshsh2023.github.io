@@ -2,25 +2,73 @@
 layout: default
 ---
 
-<section class="hero card glow">
-  <h1 class="hero-title">{{ site.title }}</h1>
-  <p class="hero-sub">{{ site.description }}</p>
+<section class="hero card">
+  <div class="hero-head">
+    <h1 class="hero-title">{{ site.title }}</h1>
+    <span class="hero-count">共 {{ site.posts | size }} 篇文档</span>
+  </div>
+
+  {% if site.categories.size > 0 %}
+  <div class="folders">
+    {% for cat in site.categories %}
+    <a class="folder" href="#cat-{{ forloop.index }}">
+      <span class="folder-name">{{ cat[0] }}</span>
+      <span class="folder-count">{{ cat[1] | size }}</span>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
 </section>
 
-<div class="grid">
-  {% for post in site.posts %}
-  <a class="card post-card glow" href="{{ post.url | relative_url }}">
-    <span class="trace trace-a" aria-hidden="true"></span>
-    <span class="trace trace-b" aria-hidden="true"></span>
-    <span class="count" aria-hidden="true"><b>10</b></span>
-    <time class="pc-date">{{ post.date | date: "%Y-%m-%d" }}</time>
-    <h2 class="pc-title">{{ post.title }}</h2>
-    <p class="pc-excerpt">{{ post.excerpt | strip_html | truncate: 96 }}</p>
-    {% if post.tags and post.tags.size > 0 %}
-    <div class="chips">
-      {% for t in post.tags %}<span class="chip">{{ t }}</span>{% endfor %}
-    </div>
-    {% endif %}
-  </a>
-  {% endfor %}
-</div>
+{% for cat in site.categories %}
+<section class="cat-section" id="cat-{{ forloop.index }}">
+  <h2 class="cat-title">
+    <span class="cat-name">{{ cat[0] }}</span>
+    <span class="cat-count">{{ cat[1] | size }} 篇</span>
+  </h2>
+  <div class="grid">
+    {% for post in cat[1] %}
+    <a class="card post-card glow" href="{{ post.url | relative_url }}">
+      <span class="trace trace-a" aria-hidden="true"></span>
+      <span class="trace trace-b" aria-hidden="true"></span>
+      <span class="count" aria-hidden="true"><b>10</b></span>
+      <time class="pc-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+      <h2 class="pc-title">{{ post.title }}</h2>
+      <p class="pc-excerpt">{{ post.excerpt | strip_html | truncate: 96 }}</p>
+      {% if post.tags and post.tags.size > 0 %}
+      <div class="chips">
+        {% for t in post.tags %}<span class="chip">{{ t }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+{% assign uncategorized = site.posts | where_exp: "p", "p.categories.size == 0" %}
+{% if uncategorized.size > 0 %}
+<section class="cat-section">
+  <h2 class="cat-title">
+    <span class="cat-name">未分类</span>
+    <span class="cat-count">{{ uncategorized | size }} 篇</span>
+  </h2>
+  <div class="grid">
+    {% for post in uncategorized %}
+    <a class="card post-card glow" href="{{ post.url | relative_url }}">
+      <span class="trace trace-a" aria-hidden="true"></span>
+      <span class="trace trace-b" aria-hidden="true"></span>
+      <span class="count" aria-hidden="true"><b>10</b></span>
+      <time class="pc-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+      <h2 class="pc-title">{{ post.title }}</h2>
+      <p class="pc-excerpt">{{ post.excerpt | strip_html | truncate: 96 }}</p>
+      {% if post.tags and post.tags.size > 0 %}
+      <div class="chips">
+        {% for t in post.tags %}<span class="chip">{{ t }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
