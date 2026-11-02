@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<section class="hero card glow">
+  <h1 class="hero-title">{{ site.title }}</h1>
+  <p class="hero-sub">{{ site.description }}</p>
+</section>
+
+<div class="grid">
+  {% for post in site.posts %}
+  <a class="card post-card glow" href="{{ post.url | relative_url }}">
+    <span class="trace trace-a" aria-hidden="true"></span>
+    <span class="trace trace-b" aria-hidden="true"></span>
+    <span class="count" aria-hidden="true"><b>10</b></span>
+    <time class="pc-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <h2 class="pc-title">{{ post.title }}</h2>
+    <p class="pc-excerpt">{{ post.excerpt | strip_html | truncate: 96 }}</p>
+    {% if post.tags and post.tags.size > 0 %}
+    <div class="chips">
+      {% for t in post.tags %}<span class="chip">{{ t }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </a>
+  {% endfor %}
+</div>

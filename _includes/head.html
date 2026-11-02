@@ -1,0 +1,24 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% seo %}
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof mermaid === "undefined") return;
+      mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+      document.querySelectorAll(".language-mermaid").forEach(function (el) {
+        var code = el.tagName === "CODE" ? el : el.querySelector("code");
+        if (!code) code = el;
+        var div = document.createElement("div");
+        div.className = "mermaid";
+        div.textContent = code.textContent;
+        (el.closest("div.highlighter-rouge") || el.closest("pre") || el).replaceWith(div);
+      });
+      var nodes = document.querySelectorAll(".mermaid");
+      if (nodes.length) mermaid.run({ nodes: nodes });
+    });
+  </script>
+</head>

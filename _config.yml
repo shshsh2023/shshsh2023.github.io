@@ -1,0 +1,20 @@
+title: 我的技术博客
+description: 简洁 · 卡片 · 光效
+author: songhong
+
+baseurl: ""
+url: "https://shshsh2023.github.io"
+
+markdown: kramdown
+permalink: /posts/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules
